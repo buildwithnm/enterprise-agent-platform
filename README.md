@@ -1,100 +1,316 @@
-## Final Architecture
-User -> HTTP Request -> FastAPI API -> AI Service -> Ollama (Local LLM) -> HTTP Response
+# Enterprise Agent Platform
 
-## Step 1 Install Prerequisites
-### Install Python
-Use Python 3.12+
-Verify: python --version
+> A production-grade Agentic AI platform built from scratch using modern AI engineering practices.
 
-### Install Git
-Verify: git --version
+This repository is being developed incrementally as part of the **Mastering Agentic AI Engineering** course. Every Git commit introduces one production-ready concept, starting from project setup and ending with a fully deployed multi-agent platform.
 
-### Install VS Code Recommended extensions
-Python
-Pylance
-Docker
-GitLens
-REST Client
+---
 
-## Step 2 Install Ollama
-### Download
-    👉 https://ollama.com
+# Project Vision
 
-### Install and Verify
-ollama --version
+Build an enterprise-ready AI platform featuring:
 
-### Download a Free Model
-For this course, I recommend "ollama pull qwen2.5:3b"
+- LangChain
+- LangGraph
+- Local & Cloud LLMs
+- RAG
+- Multi-Agent Systems
+- Observability
+- Evaluation
+- FastAPI
+- Docker
+- Kubernetes
+- GitHub Actions
 
-Why?
-- Fast
-- Small
-- Excellent reasoning
-- Tool calling capable
-- Free
+---
 
-Test
-ollama run qwen2.5:3b
+# Current Progress
 
-Ask
-Hello
+| Commit         | Module                                    | Status   |
+|----------------|-------------------------------------------|----------|
+| ✅ Commit 1   | Project Setup & Local LLM                 | Completed |
+| ✅ Commit 2   | LangChain Integration & LLM Abstraction   | Completed |
+| ⏳ Commit 3   | Prompt Templates                           | Next      |
+| ⏳ Commit 4   | Structured Output                          | Planned   |
+| ⏳ Commit 5   | Configuration Management                   | Planned   |
 
-If you receive an answer,
-Congratulations.
+---
 
-You have your own ChatGPT running locally.
+# Current Architecture
 
-## Step 3 Create Repository
+```text
+                  User
+                    │
+                    ▼
+              FastAPI API
+                    │
+                    ▼
+              LLM Service
+                    │
+                    ▼
+             LangChain Client
+                    │
+                    ▼
+            Ollama (Qwen2.5)
+```
+
+---
+
+# Repository Structure
+
+```
+enterprise-agent-platform/
+
+│
+├── app/
+│
+│   ├── api/
+│   │
+│   ├── config/
+│   │
+│   ├── llm/
+│   │   ├── client.py
+│   │   └── provider.py
+│   │
+│   ├── prompts/
+│   │
+│   ├── services/
+│   │
+│   ├── utils/
+│   │
+│   └── main.py
+│
+├── tests/
+│
+├── pyproject.toml
+│
+├── .env
+│
+└── README.md
+```
+
+---
+
+# Features Implemented
+
+## Infrastructure
+
+- FastAPI
+- Environment configuration
+- Logging
+- Unit testing
+- Modular architecture
+
+## AI
+
+- Local LLM using Ollama
+- LangChain integration
+- Provider abstraction
+- LLM client layer
+
+---
+
+# API
+
+## Health Check
+
+```
+GET /api/v1/health
+```
+
+Response
+
+```json
+{
+    "status": "UP"
+}
+```
+
+---
+
+## Chat
+
+```
+GET /api/v1/chat
+```
+
+Example
+
+```
+/api/v1/chat?question=Explain LangChain
+```
+
+Response
+
+```json
+{
+    "answer": "..."
+}
+```
+
+---
+
+# Technology Stack
+
+| Category | Technology |
+|-----------|------------|
+| Language | Python 3.12 |
+| API | FastAPI |
+| LLM | Ollama |
+| Framework | LangChain |
+| Configuration | Pydantic Settings |
+| Logging | Loguru |
+| Testing | Pytest |
+
+---
+
+# Run Locally
+
+## Clone
+
 ```bash
-mkdir enterprise-agent-platform
+git clone https://github.com/<YOUR_USERNAME>/enterprise-agent-platform.git
+
 cd enterprise-agent-platform
 ```
 
-### Initialize Git
+---
+
+## Install
+
 ```bash
-git init
+pip install -e .
 ```
 
-## Step 4 Create Virtual Environment
-### Windows
+---
+
+## Download Model
+
 ```bash
-python -m venv .venv
-.venv\Scripts\activate
+ollama pull qwen2.5:3b
 ```
 
-### Linux
+---
+
+## Start Server
+
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+uvicorn app.main:app --reload
 ```
 
-## Step 5 Install Packages
-```bash
-python -m pip install-r requirements.txt
+Open
+
+```
+http://localhost:8000/docs
 ```
 
+---
 
-## Format Code
-```bash
-black .
+# Learning Journey
+
+This project follows a commit-by-commit learning approach.
+
+```
+Commit 1
+│
+├── Project Setup
+├── FastAPI
+├── Ollama
+└── Local LLM
+
+↓
+
+Commit 2
+│
+├── LangChain
+├── Provider Pattern
+├── LLM Client
+└── API Versioning
+
+↓
+
+Commit 3
+Prompt Engineering
+
+↓
+
+Commit 4
+Structured Output
+
+↓
+
+...
+
+↓
+
+Commit 30
+Production Deployment
 ```
 
-## Lint
-```bash
-ruff check .
-```
+---
 
+# Upcoming Modules
 
-## What We Learned
-- Project organization
-- Virtual environments
-- FastAPI basics
-- Local LLMs with Ollama
-- Environment-based configuration
-- Logging
-- Basic testing
+- Prompt Templates
+- Output Parsers
+- LCEL
+- RAG
+- Tool Calling
+- Agents
+- LangGraph
+- Multi-Agent Systems
+- Observability
+- Evaluation
+- Docker
+- Kubernetes
 
-## Assignment
-1. Change the model from qwen2.5:3b to llama3.2:3b (or another Ollama model you have) and compare responses.
-2. Add a /models endpoint that returns the configured model name from settings.
-3. Enhance /health to also verify that the Ollama server is reachable.
+---
+
+# Roadmap
+
+## Phase 1
+
+- [x] Project Setup
+- [x] LangChain Integration
+- [ ] Prompt Templates
+- [ ] Structured Output
+- [ ] Configuration
+
+## Phase 2
+
+- [ ] LangChain Chains
+- [ ] LCEL
+- [ ] Streaming
+- [ ] Memory
+
+## Phase 3
+
+- [ ] RAG
+- [ ] Vector Database
+- [ ] Embeddings
+- [ ] Retrieval
+
+## Phase 4
+
+- [ ] Agents
+- [ ] Tool Calling
+- [ ] Multi-Agent
+- [ ] LangGraph
+
+## Phase 5
+
+- [ ] Observability
+- [ ] Evaluation
+- [ ] Docker
+- [ ] Kubernetes
+- [ ] GitHub Actions
+
+---
+
+# License
+
+MIT
+
+---
+
+⭐ If you're following this repository, consider starring it to track the project's progress.
