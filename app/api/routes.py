@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from app.services.llm_service import LLMService
+from app.models.persona import Persona
 
 from loguru import logger
 
@@ -16,14 +17,18 @@ def health():
 
 
 @router.get("/chat")
-def chat(question: str):
+def chat(question: str, persona: str):
 
     logger.info("Question received")
 
     logger.info(question)
 
-    answer = service.ask(question)
+    answer = service.ask(question, persona)
 
     logger.info("Response generated")
 
-    return {"answer": answer}
+    return {
+        "persona": persona,
+        "question": question,
+        "answer": answer,
+    }

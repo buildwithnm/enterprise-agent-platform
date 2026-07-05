@@ -8,10 +8,10 @@ class LLMService:
 
         self.client = LLMClient()
 
-    def ask(self, question: str):
+    def ask(self, question: str, persona: str):
         try:
 
-            return self.client.invoke(question)
+            return self.client.invoke(question, persona)
 
         except Exception as ex:
 

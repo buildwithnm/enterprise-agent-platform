@@ -26,32 +26,35 @@ Build an enterprise-ready AI platform featuring:
 
 # Current Progress
 
-| Commit         | Module                                    | Status   |
-|----------------|-------------------------------------------|----------|
-| ✅ Commit 1   | Project Setup & Local LLM                 | Completed |
-| ✅ Commit 2   | LangChain Integration & LLM Abstraction   | Completed |
-| ⏳ Commit 3   | Prompt Templates                           | Next      |
-| ⏳ Commit 4   | Structured Output                          | Planned   |
-| ⏳ Commit 5   | Configuration Management                   | Planned   |
+# Progress
 
+| Commit | Topic | Status |
+|---------|-------|--------|
+| ✅ 1 | Project Setup | Complete |
+| ✅ 2 | LangChain Integration | Complete |
+| ✅ 3 | Prompt Engineering | Complete |
+| ⏳ 4 | Structured Output | Next |
 ---
 
 # Current Architecture
 
 ```text
-                  User
-                    │
-                    ▼
-              FastAPI API
-                    │
-                    ▼
-              LLM Service
-                    │
-                    ▼
-             LangChain Client
-                    │
-                    ▼
-            Ollama (Qwen2.5)
+User
+ │
+ ▼
+FastAPI
+ │
+ ▼
+LLM Service
+ │
+ ▼
+Prompt Template
+ │
+ ▼
+LangChain
+ │
+ ▼
+Ollama
 ```
 
 ---
@@ -91,22 +94,24 @@ enterprise-agent-platform/
 
 ---
 
-# Features Implemented
+# Features
 
 ## Infrastructure
 
 - FastAPI
-- Environment configuration
+- Modular Architecture
 - Logging
-- Unit testing
-- Modular architecture
+- Configuration
+- Unit Testing
 
 ## AI
 
-- Local LLM using Ollama
-- LangChain integration
-- Provider abstraction
-- LLM client layer
+- Ollama
+- LangChain
+- Prompt Templates
+- System Prompt
+- Human Prompt
+- LCEL (Prompt → LLM)
 
 ---
 
@@ -314,3 +319,7 @@ MIT
 ---
 
 ⭐ If you're following this repository, consider starring it to track the project's progress.
+
+# Next Milestone
+
+Commit 4 introduces **Structured Output**, where we'll make the LLM return valid JSON instead of unpredictable text.
