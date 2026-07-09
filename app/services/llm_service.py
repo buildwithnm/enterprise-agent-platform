@@ -1,4 +1,5 @@
 import time
+from datetime import datetime, timezone
 from app.llm.client import LLMClient
 from app.utils.exceptions import LLMException
 from app.config.settings import settings
@@ -25,6 +26,8 @@ class LLMService:
                 answer=str(answer),
                 model=settings.MODEL_NAME,
                 execution_time_ms=elapsed,
+                provider=settings.PROVIDER,
+                timestamp=datetime.now(timezone.utc)
             )
 
         except Exception as ex:
