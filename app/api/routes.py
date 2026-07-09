@@ -38,3 +38,17 @@ def chat(request: ChatRequest):
     # }
 
     return answer
+
+
+@router.post(
+    "/chat/markdown",
+    response_model=ChatResponse,
+)
+def markdown_chat(
+    request: ChatRequest,
+):
+
+    return service.ask_markdown(
+        question=request.question,
+        persona=request.persona.value,
+    )

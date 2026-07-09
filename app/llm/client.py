@@ -1,17 +1,20 @@
 from app.llm.provider import get_llm
-from app.prompts.manager import PromptManager
+from app.chains.chat_chain import ChatChain
+from app.chains.markdown_chain import MarkdownChain
 
 
 class LLMClient:
 
-    def __init__(self):
-
-        self.llm = get_llm()
-
     def invoke(self, question: str, persona: str):
+        chain = ChatChain.build(persona=persona)
 
-        prompt = PromptManager.get_prompt(persona)
-        chain = prompt | self.llm
-        response = chain.invoke({"question": question})
+        return chain.invoke({"question": question})
 
-        return response.content
+    def invoke_markdown(
+        self,
+        question: str,
+        persona: str,
+    ):
+        chain = MarkdownChain.build(persona)
+
+        return chain.invoke({"question": question})

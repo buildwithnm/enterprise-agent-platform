@@ -42,25 +42,19 @@ Build an enterprise-ready AI platform featuring:
 User
  │
  ▼
-Request Model
- │
- ▼
 FastAPI
  │
  ▼
 LLM Service
  │
  ▼
-Prompt Template
+Chat Chain
  │
  ▼
-LangChain
+Prompt → LLM → Parser
  │
  ▼
 Ollama
- │
- ▼
-Response Model
 ```
 
 ---
@@ -106,9 +100,9 @@ enterprise-agent-platform/
 
 - Prompt Templates
 - Persona Management
-- Typed Request Models
-- Typed Response Models
-- Execution Time Metrics
+- Typed Request/Response Models
+- LCEL Pipelines
+- Output Parsers
 
 ## Infrastructure
 
@@ -171,15 +165,14 @@ Response
 
 # Technology Stack
 
-| Category | Technology |
-|-----------|------------|
-| Language | Python 3.12 |
-| API | FastAPI |
-| LLM | Ollama |
-| Framework | LangChain |
-| Configuration | Pydantic Settings |
-| Logging | Loguru |
-| Testing | Pytest |
+| Commit | Topic | Status |
+|---------|-------|--------|
+| ✅ 1 | Project Setup | Complete |
+| ✅ 2 | LangChain Integration | Complete |
+| ✅ 3 | Prompt Engineering | Complete |
+| ✅ 4 | Structured Output | Complete |
+| ✅ 5 | LCEL Pipelines | Complete |
+| ⏳ 6 | Streaming Responses | Next |
 
 ---
 
