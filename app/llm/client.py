@@ -1,6 +1,7 @@
 from app.llm.provider import get_llm
 from app.prompts.manager import PromptManager
 
+
 class LLMClient:
 
     def __init__(self):
@@ -11,10 +12,6 @@ class LLMClient:
 
         prompt = PromptManager.get_prompt(persona)
         chain = prompt | self.llm
-        response = chain.invoke(
-            {
-                "question": question
-            }
-        )
+        response = chain.invoke({"question": question})
 
         return response.content

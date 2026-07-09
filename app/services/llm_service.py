@@ -1,5 +1,8 @@
+import time
 from app.llm.client import LLMClient
 from app.utils.exceptions import LLMException
+from app.config.settings import settings
+from app.models.chat_response import ChatResponse
 
 
 class LLMService:
@@ -10,8 +13,19 @@ class LLMService:
 
     def ask(self, question: str, persona: str):
         try:
+            start = time.perf_counter()
 
-            return self.client.invoke(question, persona)
+            answer = self.client.invoke(question, persona)
+
+            elapsed = int((time.perf_counter() - start) * 1000)
+
+            return ChatResponse(
+                question=question,
+                persona=persona,
+                answer=str(answer),
+                model=settings.MODEL_NAME,
+                execution_time_ms=elapsed,
+            )
 
         except Exception as ex:
 

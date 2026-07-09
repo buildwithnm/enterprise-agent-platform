@@ -16,7 +16,10 @@ class PromptManager:
     @classmethod
     def get_prompt(cls, persona: str):
 
-        system_prompt = cls.PROMPTS.get(persona, GENERAL_SYSTEM_PROMPT,)
+        system_prompt = cls.PROMPTS.get(
+            persona,
+            GENERAL_SYSTEM_PROMPT,
+        )
 
         return ChatPromptTemplate.from_messages(
             [
