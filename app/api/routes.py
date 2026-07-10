@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 
+from app.container.container import container
 from app.services.llm_service import LLMService
 from app.models.chat_request import ChatRequest
 from app.models.chat_response import ChatResponse
@@ -7,9 +8,6 @@ from app.models.chat_response import ChatResponse
 from loguru import logger
 
 router = APIRouter(prefix="/api/v1")
-
-service = LLMService()
-
 
 @router.get("/health")
 def health():
@@ -24,10 +22,9 @@ def health():
 def chat(request: ChatRequest):
 
     logger.info("Question received")
-
     logger.info(request.question)
 
-    answer = service.ask(request.question, request.persona)
+    answer = container.service.ask(request.question, request.persona.value)
 
     logger.info("Response generated")
 
@@ -48,7 +45,7 @@ def markdown_chat(
     request: ChatRequest,
 ):
 
-    return service.ask_markdown(
+    return container.service.ask_markdown(
         question=request.question,
         persona=request.persona.value,
     )

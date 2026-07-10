@@ -1,6 +1,5 @@
 import time
 from datetime import datetime, timezone
-from app.llm.client import LLMClient
 from app.utils.exceptions import LLMException
 from app.config.settings import settings
 from app.models.chat_response import ChatResponse
@@ -9,15 +8,23 @@ from loguru import logger
 
 class LLMService:
 
-    def __init__(self):
-
-        self.client = LLMClient()
+    def __init__(self, chain):
+        self.chain = chain
 
     def ask(self, question: str, persona: str):
         try:
             start = time.perf_counter()
 
-            answer = self.client.invoke(question, persona)
+            runnable = self.chain.build(persona)
+
+            print(runnable.input_schema.model_json_schema())
+
+            payload = {"question": question}
+            print(type(payload))
+            print(payload)
+
+
+            answer = runnable.invoke(payload)
 
             elapsed = int((time.perf_counter() - start) * 1000)
 
@@ -51,10 +58,11 @@ class LLMService:
     ):
 
         start = time.perf_counter()
-        answer = self.client.invoke_markdown(
-            question,
-            persona,
-        )
+
+        runnable = self.chain.build(persona)
+
+        answer = runnable.invoke({ "question": question})
+
         elapsed = int((time.perf_counter() - start) * 1000)
         return ChatResponse(
             question=question,

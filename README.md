@@ -1,129 +1,250 @@
 # Enterprise Agent Platform
 
-> A production-grade Agentic AI platform built from scratch using modern AI engineering practices.
+> Build a production-grade Agentic AI Platform from scratch using **FastAPI**, **LangChain**, **LangGraph**, and **Open Source LLMs**.
 
-This repository is being developed incrementally as part of the **Mastering Agentic AI Engineering** course. Every Git commit introduces one production-ready concept, starting from project setup and ending with a fully deployed multi-agent platform.
+This repository is a step-by-step learning project where each Git commit introduces a new concept, gradually evolving from a simple LLM API into a production-ready multi-agent AI platform.
 
 ---
 
 # Project Vision
 
-Build an enterprise-ready AI platform featuring:
+The goal is not to build another chatbot.
 
-- LangChain
-- LangGraph
-- Local & Cloud LLMs
-- RAG
-- Multi-Agent Systems
-- Observability
-- Evaluation
-- FastAPI
-- Docker
-- Kubernetes
-- GitHub Actions
+The goal is to understand how enterprise AI systems are designed, developed, tested, monitored, and deployed.
+
+By the end of this repository, you will have implemented:
+
+* Enterprise FastAPI backend
+* LangChain Expression Language (LCEL)
+* LangGraph Agent Workflows
+* RAG (Retrieval-Augmented Generation)
+* Tool Calling
+* Multi-Agent Systems
+* Memory
+* Observability
+* Evaluation Framework
+* Production Deployment
 
 ---
 
-# Current Progress
+# Technology Stack
 
-# Progress
+## Backend
 
-| Commit | Topic | Status |
-|---------|-------|--------|
-| ✅ 1 | Project Setup | Complete |
-| ✅ 2 | LangChain Integration | Complete |
-| ✅ 3 | Prompt Engineering | Complete |
-| ✅ 4 | Structured Output & API Models | Complete |
-| ⏳ 5 | LCEL & Output Parsers | Next |
+* Python 3.12+
+* FastAPI
+* Uvicorn
 
-# Current Architecture
+## AI Framework
 
-```text
-User
- │
- ▼
-FastAPI
- │
- ▼
-LLM Service
- │
- ▼
-Chat Chain
- │
- ▼
-Prompt → LLM → Parser
- │
- ▼
-Ollama
-```
+* LangChain
+* LangChain Core
+* LangGraph *(Upcoming)*
+
+## LLM
+
+* Ollama
+* Qwen2.5 (Default)
+
+## Configuration
+
+* Pydantic
+* pydantic-settings
+* dotenv
+
+## Logging
+
+* Loguru
+
+## Testing
+
+* Pytest
 
 ---
 
 # Repository Structure
 
-```
+```text
 enterprise-agent-platform/
 
 │
+
 ├── app/
-│
+
 │   ├── api/
-│   │
+
+│   ├── chains/
+
 │   ├── config/
-│   │
+
+│   ├── container/
+
 │   ├── llm/
-│   │   ├── client.py
-│   │   └── provider.py
-│   │
+
+│   ├── models/
+
+│   ├── parsers/
+
 │   ├── prompts/
-│   │
+
 │   ├── services/
-│   │
+
 │   ├── utils/
-│   │
+
 │   └── main.py
+
 │
+
 ├── tests/
+
 │
-├── pyproject.toml
-│
+
 ├── .env
-│
+
+├── pyproject.toml
+
 └── README.md
 ```
 
 ---
 
-# Features
+# Current Architecture
 
-### AI Features
+```text
+                    User
 
-- Prompt Templates
-- Persona Management
-- Typed Request/Response Models
-- LCEL Pipelines
-- Output Parsers
+                      │
 
-## Infrastructure
+                      ▼
 
-- FastAPI
-- Modular Architecture
-- Logging
-- Configuration
-- Unit Testing
+                  FastAPI
 
-## AI
+                      │
 
-- Ollama
-- LangChain
-- Prompt Templates
-- System Prompt
-- Human Prompt
-- LCEL (Prompt → LLM)
+                      ▼
+
+                 API Router
+
+                      │
+
+                      ▼
+
+                 LLM Service
+
+                      │
+
+                      ▼
+
+                 Chat Chain
+
+                      │
+
+        Prompt → LLM → Parser
+
+                      │
+
+                      ▼
+
+                   Ollama
+```
 
 ---
 
-# API
+# Features Implemented
+
+## Commit 1 — Project Bootstrap
+
+* FastAPI project setup
+* Folder structure
+* Environment configuration
+* Ollama integration
+* Health endpoint
+
+---
+
+## Commit 2 — LangChain Integration
+
+* LangChain added
+* Prompt templates
+* LLM abstraction
+* Basic chat endpoint
+
+---
+
+## Commit 3 — Prompt Engineering
+
+Implemented a prompt management layer.
+
+Features:
+
+* Persona support
+* General Assistant
+* Data Engineer Assistant
+* Prompt Manager
+* Dynamic system prompts
+
+---
+
+## Commit 4 — Structured API Models
+
+Introduced enterprise API contracts.
+
+Features:
+
+* Pydantic request models
+* Pydantic response models
+* Execution time metrics
+* Provider metadata
+* Timestamp metadata
+
+---
+
+## Commit 5 — LangChain Expression Language (LCEL)
+
+Implemented reusable LangChain pipelines.
+
+Features:
+
+* Runnable chains
+* Output parsers
+* Base chain composition
+* Separation of prompt and execution logic
+
+---
+
+## Commit 6 — Architecture Refactoring
+
+Improved project architecture.
+
+Features:
+
+* Constructor-based dependency injection
+* Application container
+* BaseChain abstraction
+* Improved separation of concerns
+* Better extensibility for future chains
+
+---
+
+# Supported Personas
+
+Current personas:
+
+* General Assistant
+* Data Engineer
+
+Future personas:
+
+* SQL Expert
+* Cloud Architect
+* Python Expert
+* Reviewer
+* Planner
+* RAG Assistant
+
+---
+
+# Current API
 
 ## Health Check
 
@@ -131,72 +252,88 @@ enterprise-agent-platform/
 GET /api/v1/health
 ```
 
-Response
-
-```json
-{
-    "status": "UP"
-}
-```
-
 ---
 
 ## Chat
 
 ```
-GET /api/v1/chat
+POST /api/v1/chat
 ```
 
-Example
-
-```
-/api/v1/chat?question=Explain LangChain
-```
-
-Response
+Example request:
 
 ```json
 {
-    "answer": "..."
+  "question": "Explain LangChain",
+  "persona": "general"
+}
+```
+
+Example response:
+
+```json
+{
+  "question": "Explain LangChain",
+  "persona": "general",
+  "answer": "...",
+  "model": "qwen2.5:3b",
+  "execution_time_ms": 1250,
+  "provider": "ollama",
+  "timestamp": "2026-07-10T10:25:00Z"
 }
 ```
 
 ---
 
-# Technology Stack
+# Development Setup
 
-| Commit | Topic | Status |
-|---------|-------|--------|
-| ✅ 1 | Project Setup | Complete |
-| ✅ 2 | LangChain Integration | Complete |
-| ✅ 3 | Prompt Engineering | Complete |
-| ✅ 4 | Structured Output | Complete |
-| ✅ 5 | LCEL Pipelines | Complete |
-| ⏳ 6 | Streaming Responses | Next |
-
----
-
-# Run Locally
-
-## Clone
+## Clone Repository
 
 ```bash
-git clone https://github.com/<YOUR_USERNAME>/enterprise-agent-platform.git
+git clone <repository-url>
 
 cd enterprise-agent-platform
 ```
 
 ---
 
-## Install
+## Install Dependencies
 
 ```bash
 pip install -e .
 ```
 
+or
+
+```bash
+pip install -e ".[dev]"
+```
+
 ---
 
-## Download Model
+## Configure Environment
+
+Create a `.env` file.
+
+```text
+APP_NAME=Enterprise Agent Platform
+
+OLLAMA_HOST=http://localhost:11434
+
+MODEL_NAME=qwen2.5:3b
+
+PROVIDER=ollama
+```
+
+---
+
+## Start Ollama
+
+```bash
+ollama serve
+```
+
+Pull the model:
 
 ```bash
 ollama pull qwen2.5:3b
@@ -204,129 +341,111 @@ ollama pull qwen2.5:3b
 
 ---
 
-## Start Server
+## Run Application
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-Open
+---
 
-```
-http://localhost:8000/docs
-```
+# Learning Roadmap
+
+## Phase 1 — Foundation ✅
+
+* ✅ Project Setup
+* ✅ LangChain
+* ✅ Prompt Engineering
+* ✅ Personas
+* ✅ Structured API
+* ✅ LCEL
+* ✅ Dependency Injection
 
 ---
 
-# Learning Journey
+## Phase 2 — Production Engineering (Next)
 
-This project follows a commit-by-commit learning approach.
-
-```
-Commit 1
-│
-├── Project Setup
-├── FastAPI
-├── Ollama
-└── Local LLM
-
-↓
-
-Commit 2
-│
-├── LangChain
-├── Provider Pattern
-├── LLM Client
-└── API Versioning
-
-↓
-
-Commit 3
-Prompt Engineering
-
-↓
-
-Commit 4
-Structured Output
-
-↓
-
-...
-
-↓
-
-Commit 30
-Production Deployment
-```
+* Request Middleware
+* Correlation IDs
+* JSON Logging
+* Global Exception Handling
+* Async FastAPI
+* Streaming Responses
+* Retry Policies
 
 ---
 
-# Upcoming Modules
+## Phase 3 — Enterprise LangChain
 
-- Prompt Templates
-- Output Parsers
-- LCEL
-- RAG
-- Tool Calling
-- Agents
-- LangGraph
-- Multi-Agent Systems
-- Observability
-- Evaluation
-- Docker
-- Kubernetes
+* RunnableParallel
+* RunnableBranch
+* Output Parsers
+* Structured Output
+* Prompt Versioning
+* Prompt Registry
 
 ---
 
-# Roadmap
+## Phase 4 — RAG
 
-## Phase 1
-
-- [x] Project Setup
-- [x] LangChain Integration
-- [ ] Prompt Templates
-- [ ] Structured Output
-- [ ] Configuration
-
-## Phase 2
-
-- [ ] LangChain Chains
-- [ ] LCEL
-- [ ] Streaming
-- [ ] Memory
-
-## Phase 3
-
-- [ ] RAG
-- [ ] Vector Database
-- [ ] Embeddings
-- [ ] Retrieval
-
-## Phase 4
-
-- [ ] Agents
-- [ ] Tool Calling
-- [ ] Multi-Agent
-- [ ] LangGraph
-
-## Phase 5
-
-- [ ] Observability
-- [ ] Evaluation
-- [ ] Docker
-- [ ] Kubernetes
-- [ ] GitHub Actions
+* Document Loaders
+* Chunking
+* Embeddings
+* Vector Database
+* Retrieval
+* Context Injection
 
 ---
 
-# License
+## Phase 5 — Agentic AI
 
-MIT
+* Tool Calling
+* Planner Agent
+* SQL Agent
+* Research Agent
+* LangGraph
+* Multi-Agent Systems
 
 ---
 
-⭐ If you're following this repository, consider starring it to track the project's progress.
+## Phase 6 — Production
 
-# Next Milestone
+* Docker
+* Kubernetes
+* Redis
+* PostgreSQL
+* LangSmith
+* OpenTelemetry
+* Monitoring
+* CI/CD
 
-Commit 4 introduces **Structured Output**, where we'll make the LLM return valid JSON instead of unpredictable text.
+---
+
+# Progress Tracker
+
+| Commit | Topic                            | Status   |
+| ------ | -------------------------------- | -------- |
+| ✅ 1    | Project Bootstrap                | Complete |
+| ✅ 2    | LangChain Integration            | Complete |
+| ✅ 3    | Prompt Engineering & Personas    | Complete |
+| ✅ 4    | Structured API Models            | Complete |
+| ✅ 5    | LCEL Pipelines                   | Complete |
+| ✅ 6    | Dependency Injection & BaseChain | Complete |
+| ⏳ 7    | Production Middleware & Logging  | Next     |
+
+---
+
+# Long-Term Goals
+
+By the end of this project, this repository will demonstrate:
+
+* Production-grade AI backend architecture
+* Enterprise coding standards
+* Clean Architecture principles
+* SOLID design
+* LangChain best practices
+* LangGraph orchestration
+* Production observability
+* Scalable deployment
+
+The objective is to build a repository that is suitable for learning, interview preparation, portfolio demonstration, and as a foundation for real-world AI applications.

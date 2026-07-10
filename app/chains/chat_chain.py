@@ -1,17 +1,10 @@
-from app.llm.provider import get_llm
-from app.parsers.text_parser import get_output_parser
+from app.chains.base_chain import BaseChain
 from app.prompts.manager import PromptManager
 
+class ChatChain(BaseChain):
 
-class ChatChain:
-
-    @staticmethod
-    def build(persona: str):
+    def build(self, persona: str):
 
         prompt = PromptManager.get_prompt(persona)
 
-        llm = get_llm()
-
-        parser = get_output_parser()
-
-        return prompt | llm | parser
+        return self.compose(prompt)
