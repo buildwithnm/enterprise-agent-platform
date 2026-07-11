@@ -167,6 +167,14 @@ enterprise-agent-platform/
 - Async middleware
 - Async testing
 
+### Streaming Features
+
+- Server-Sent Events (SSE)
+- Token Streaming
+- Async Generators
+- LangChain `astream()`
+- Streaming Error Handling
+
 ## Commit 1 — Project Bootstrap
 
 * FastAPI project setup
@@ -447,8 +455,9 @@ uvicorn app.main:app --reload
 | ✅ 5 | LCEL | Complete |
 | ✅ 6 | Dependency Injection | Complete |
 | ✅ 7 | Middleware & Logging | Complete |
-| ✅ 8 | Async FastAPI & LangChain | Complete |
-| ⏳ 9 | Streaming Responses (SSE) | Next |
+| ✅ 8 | Async FastAPI | Complete |
+| ✅ 9 | Streaming Responses (SSE) | Complete |
+| ⏳ 10 | Advanced LCEL | Next |
 
 # Long-Term Goals
 

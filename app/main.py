@@ -13,7 +13,4 @@ app.include_router(router)
 
 app.add_middleware(RequestContextMiddleware)
 app.add_middleware(LoggingMiddleware)
-app.add_exception_handler(
-    LLMException,
-    llm_exception_handler
-)
+app.add_exception_handler(LLMException, llm_exception_handler)

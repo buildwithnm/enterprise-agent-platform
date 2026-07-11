@@ -14,9 +14,7 @@ class AppContainer:
 
         self.chat_chain = ChatChain(self.llm)
 
-        self.service = LLMService(
-            self.chat_chain
-        )
+        self.service = LLMService(self.chat_chain)
 
 
 container = AppContainer()
