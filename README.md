@@ -152,6 +152,14 @@ enterprise-agent-platform/
 
 # Features Implemented
 
+### Production Features
+
+- Request Correlation IDs
+- Logging Middleware
+- Global Exception Handler
+- Structured Request Logging
+- Request Timing
+
 ## Commit 1 — Project Bootstrap
 
 * FastAPI project setup
@@ -423,15 +431,16 @@ uvicorn app.main:app --reload
 
 # Progress Tracker
 
-| Commit | Topic                            | Status   |
-| ------ | -------------------------------- | -------- |
-| ✅ 1    | Project Bootstrap                | Complete |
-| ✅ 2    | LangChain Integration            | Complete |
-| ✅ 3    | Prompt Engineering & Personas    | Complete |
-| ✅ 4    | Structured API Models            | Complete |
-| ✅ 5    | LCEL Pipelines                   | Complete |
-| ✅ 6    | Dependency Injection & BaseChain | Complete |
-| ⏳ 7    | Production Middleware & Logging  | Next     |
+| Commit | Topic | Status |
+|---------|-------|--------|
+| ✅ 1 | Project Bootstrap | Complete |
+| ✅ 2 | LangChain Integration | Complete |
+| ✅ 3 | Prompt Engineering | Complete |
+| ✅ 4 | Structured Models | Complete |
+| ✅ 5 | LCEL | Complete |
+| ✅ 6 | Dependency Injection | Complete |
+| ✅ 7 | Middleware & Structured Logging | Complete |
+| ⏳ 8 | Async FastAPI & Async LangChain | Next |
 
 ---
 
