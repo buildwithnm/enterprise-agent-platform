@@ -160,6 +160,13 @@ enterprise-agent-platform/
 - Structured Request Logging
 - Request Timing
 
+### Performance Features
+
+- Async FastAPI endpoints
+- Async LangChain execution
+- Async middleware
+- Async testing
+
 ## Commit 1 — Project Bootstrap
 
 * FastAPI project setup
@@ -439,10 +446,9 @@ uvicorn app.main:app --reload
 | ✅ 4 | Structured Models | Complete |
 | ✅ 5 | LCEL | Complete |
 | ✅ 6 | Dependency Injection | Complete |
-| ✅ 7 | Middleware & Structured Logging | Complete |
-| ⏳ 8 | Async FastAPI & Async LangChain | Next |
-
----
+| ✅ 7 | Middleware & Logging | Complete |
+| ✅ 8 | Async FastAPI & LangChain | Complete |
+| ⏳ 9 | Streaming Responses (SSE) | Next |
 
 # Long-Term Goals
 
