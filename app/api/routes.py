@@ -26,20 +26,14 @@ def health():
     "/chat",
     response_model=ChatResponse,
 )
-def chat(request: ChatRequest):
+async def chat(request: ChatRequest):
 
     logger.bind(request_id=request_id_ctx.get()).info("Question received",)
     logger.info(request.question)
 
-    answer = container.service.ask(request.question, request.persona.value)
+    answer = await container.service.ask(request.question, request.persona.value)
 
     logger.info("Response generated")
-
-    # return {
-    #     "persona": persona,
-    #     "question": question,
-    #     "answer": answer,
-    # }
 
     return answer
 
@@ -48,11 +42,11 @@ def chat(request: ChatRequest):
     "/chat/markdown",
     response_model=ChatResponse,
 )
-def markdown_chat(
+async def markdown_chat(
     request: ChatRequest,
 ):
 
-    return container.service.ask_markdown(
+    return await container.service.ask_markdown(
         question=request.question,
         persona=request.persona.value,
     )

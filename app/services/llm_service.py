@@ -11,7 +11,7 @@ class LLMService:
     def __init__(self, chain):
         self.chain = chain
 
-    def ask(self, question: str, persona: str):
+    async def ask(self, question: str, persona: str):
         try:
             start = time.perf_counter()
 
@@ -24,7 +24,7 @@ class LLMService:
             print(payload)
 
 
-            answer = runnable.invoke(payload)
+            answer = await runnable.ainvoke(payload)
 
             elapsed = int((time.perf_counter() - start) * 1000)
 
@@ -51,7 +51,7 @@ class LLMService:
 
             raise LLMException(str(ex))
 
-    def ask_markdown(
+    async def ask_markdown(
         self,
         question: str,
         persona: str,
@@ -61,7 +61,7 @@ class LLMService:
 
         runnable = self.chain.build(persona)
 
-        answer = runnable.invoke({ "question": question})
+        answer = await runnable.ainvoke({ "question": question})
 
         elapsed = int((time.perf_counter() - start) * 1000)
         return ChatResponse(
