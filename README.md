@@ -175,6 +175,19 @@ enterprise-agent-platform/
 - LangChain `astream()`
 - Streaming Error Handling
 
+
+## Advanced LangChain Features
+
+- RunnableLambda
+- RunnableAssign
+- RunnablePassthrough
+- RunnableParallel
+- RunnableBranch
+- Retry Policies
+- Model Fallbacks
+- LCEL Playground
+
+
 ## Commit 1 — Project Bootstrap
 
 * FastAPI project setup
