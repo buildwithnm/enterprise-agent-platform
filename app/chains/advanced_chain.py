@@ -1,45 +1,25 @@
-from datetime import datetime
-from langchain_core.runnables import (
-    RunnableLambda,
-    RunnableParallel,
-    RunnableBranch,
-    RunnablePassthrough,
-)
+from langchain_core.runnables import RunnableLambda
 
-clean_question = RunnableLambda(
-    lambda x: x["question"].strip()
-)
+from app.chains.base_chain import BaseChain
+from app.prompts.manager import PromptManager
 
-RunnablePassthrough.assign(
-    timestamp=lambda _: datetime.utcnow().isoformat()
-)
+class AdvancedChain(BaseChain):
 
-RunnablePassthrough.assign(
-    word_count=lambda x: len(
-        x["question"].split()
-    )
-)
+    def clean_question(self):
 
-# parallel = RunnableParallel(
-#     summary=summary_chain,
-#     keywords=keyword_chain,
-# )
+        return RunnableLambda(
+            lambda x: {
+                "question": x["question"].strip()
+            }
+        )
 
-# RunnableBranch(
+    def build(self, persona: str):
 
-#     (
-#         lambda x:
-#         x["persona"] == "general",
+        prompt = PromptManager.get_prompt(persona)
 
-#         general_chain,
-#     ),
-
-#     (
-#         lambda x:
-#         x["persona"] == "data_engineer",
-
-#         data_engineer_chain,
-#     ),
-
-#     default_chain,
-# )
+        return (
+            self.clean_question()
+            | prompt
+            | self.llm
+            | self.get_output_parser()
+        )

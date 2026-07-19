@@ -187,6 +187,31 @@ enterprise-agent-platform/
 - Model Fallbacks
 - LCEL Playground
 
+## Structured AI Outputs
+
+- Pydantic Output Parser
+- JSON Output Parser
+- Structured Chains
+- Output Validation
+- Output Models
+
+
+## Processing Pipeline
+
+Every incoming request passes through a preprocessing pipeline before reaching the LLM.
+
+Current stages
+
+- Normalize whitespace
+- Validate input
+
+Future stages
+
+- Prompt Injection Detection
+- PII Masking
+- Language Detection
+- Query Rewriting
+- Translation
 
 ## Commit 1 — Project Bootstrap
 

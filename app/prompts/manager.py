@@ -16,12 +16,6 @@ class PromptManager:
     @classmethod
     def get_prompt(cls, persona: str):
 
-        # registry = PromptRegistry()
-
-        # definition = registry.get(persona)
-
-        # system_prompt = definition.system
-
         system_prompt = cls.PROMPTS.get(
             persona,
             GENERAL_SYSTEM_PROMPT,
